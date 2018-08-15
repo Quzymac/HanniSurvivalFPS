@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     [SerializeField] float speed = 5f;
     [SerializeField] float mouseSensitivity = 3f;
 
+    [SerializeField] float gravity = 10f;
+    [SerializeField] float jumpForce = 2f;
+    Vector3 jump;
+    bool jumpUsed = false;
+
+
+
+    [Header("JetPack")]
+    [SerializeField] float thrusterForce = 1000f;
+    [SerializeField] float thrusterFuelBurnSpeed = 1f;
+    [SerializeField] float thrusterFuelRegenSpeed = 0.3f;
+    float thrusterFuelAmount = 1f;
+
     PlayerMotor motor;
+
+    Rigidbody rb;
 
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -46,6 +64,54 @@ public class PlayerController : MonoBehaviour {
         //apply camera rotation
         motor.RotateCamera(cameraRotation);
 
+        //jump
+        float disstanceToTheGround = GetComponent<Collider>().bounds.extents.y;
+
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, disstanceToTheGround + 0.1f);
+        if (isGrounded)
+        {
+            jumpUsed = false;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+                isGrounded = false;
+            }
+
+        }
+        //thruster can only be used after releasing jump
+        if (!isGrounded)
+        {
+            if (Input.GetButtonUp("Jump"))
+            {
+                jumpUsed = true;
+            }
+        }
+
+        // Calculate the thrusterforce based on player input
+        Vector3 _thrusterForce = Vector3.zero;
+        if (Input.GetButton("Jump") && jumpUsed && !isGrounded && thrusterFuelAmount > 0f)
+        {
+            thrusterFuelAmount -= thrusterFuelBurnSpeed * Time.deltaTime;
+
+            if (thrusterFuelAmount >= 0.01f)
+            {
+                _thrusterForce = Vector3.up * thrusterForce;
+            }
+        }
+        else
+        {
+            thrusterFuelAmount += thrusterFuelRegenSpeed * Time.deltaTime;
+        }
+
+        thrusterFuelAmount = Mathf.Clamp(thrusterFuelAmount, 0f, 1f);
+
+        // Apply the thruster force
+        motor.ApplyThruster(_thrusterForce);
     }
 
+    public float GetThrusterFuelAmount()
+    {
+        return thrusterFuelAmount;
+    }
 }
