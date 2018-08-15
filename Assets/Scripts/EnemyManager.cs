@@ -10,7 +10,6 @@ public class EnemyManager : MonoBehaviour {
     public void EnemyShot(GameObject enemyGameObject, float dmg)
     {
         enemyGameObject.GetComponent<EnemyHealth>().TakeDamage(dmg);
-        Debug.Log(name + " has been shot!");
     }
     public int GetEnemiesAlive()
     {
