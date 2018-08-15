@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float mouseSensitivity = 3f;
 
-    [SerializeField] float gravity = 10f;
     [SerializeField] float jumpForce = 2f;
     Vector3 jump;
     bool jumpUsed = false;
@@ -59,10 +58,10 @@ public class PlayerController : MonoBehaviour
         //calculate camera rotation (up and down)
         float xRot = Input.GetAxisRaw("Mouse Y");
 
-        Vector3 cameraRotation = new Vector3(xRot, 0f, 0f) * mouseSensitivity;
+        float cameraRotationX = xRot * mouseSensitivity;
 
         //apply camera rotation
-        motor.RotateCamera(cameraRotation);
+        motor.RotateCamera(cameraRotationX);
 
         //jump
         float disstanceToTheGround = GetComponent<Collider>().bounds.extents.y;
