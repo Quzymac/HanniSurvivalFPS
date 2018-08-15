@@ -20,6 +20,11 @@ public class EnemyHealth : MonoBehaviour
         enemyHPSlider.value = enemyCurrentHP;
     }
 
+    private void Update()
+    {
+        enemyHPSlider.transform.rotation = Camera.main.transform.rotation;
+    }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Bullet")  // Change this how you want so that it fits your code :)
