@@ -6,6 +6,8 @@ public class PlayerShoot : MonoBehaviour {
 
     public PlayerWeapon weapon;
 
+    [SerializeField] EnemyManager enemyManager;
+
     [SerializeField] Camera cam;
 
     [SerializeField] LayerMask mask;
@@ -30,13 +32,9 @@ public class PlayerShoot : MonoBehaviour {
             //we hit something
             if(hit.collider.tag == "Enemy")
             {
-                EnemyShot(hit.collider.name);
+                enemyManager.EnemyShot(hit.collider.gameObject, weapon.damage);
             }
         }
     }
-    //Move this to enemy manager
-    void EnemyShot(string name)
-    {
-        Debug.Log(name + " has been shot!");
-    }
+    
 }

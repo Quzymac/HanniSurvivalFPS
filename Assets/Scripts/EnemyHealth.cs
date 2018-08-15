@@ -25,6 +25,20 @@ public class EnemyHealth : MonoBehaviour
         enemyHPSlider.transform.rotation = Camera.main.transform.rotation;
     }
 
+    public void TakeDamage(float dmg)
+    {
+        enemyCurrentHP -= dmg;
+        enemyHPSlider.value = enemyCurrentHP;
+        if (enemyCurrentHP < 1f)
+        {
+            EnemyDie();
+        }
+    }
+    void EnemyDie()
+    {
+        Destroy(gameObject);
+    }
+    /*
     void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Bullet")  // Change this how you want so that it fits your code :)
@@ -38,5 +52,5 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
-
+    */
 }
