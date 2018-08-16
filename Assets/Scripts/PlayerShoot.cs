@@ -29,7 +29,7 @@ public class PlayerShoot : MonoBehaviour {
     }
     void Shoot()
     {
-        recoilComponent.GetComponent<Recoil>().StartRecoil(0.2f, weapon.recoil, weapon.recoilSpeed);
+        recoilComponent.GetComponent<Recoil>().StartRecoil(0.2f, -weapon.recoil, weapon.recoilSpeed);
 
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
