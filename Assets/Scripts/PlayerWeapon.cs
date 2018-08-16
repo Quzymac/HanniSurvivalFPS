@@ -9,4 +9,8 @@ public class PlayerWeapon  {
 
     public float damage = 10f;
     public float range = 100f;
+    public float recoil = 10f;
+    public float recoilSpeed = 10f;
+
+
 }

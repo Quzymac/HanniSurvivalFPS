@@ -6,16 +6,19 @@ public class PlayerShoot : MonoBehaviour {
 
     public PlayerWeapon weapon;
 
-    [SerializeField] EnemyManager enemyManager;
+    [SerializeField] GameObject enemyManager;
 
     [SerializeField] Camera cam;
 
     [SerializeField] LayerMask mask;
 
+    [SerializeField] GameObject recoilComponent;
+
     private void Start()
     {
-
+        enemyManager = GameObject.Find("EnemyManager");
     }
+
 
     private void Update()
     {
@@ -26,13 +29,15 @@ public class PlayerShoot : MonoBehaviour {
     }
     void Shoot()
     {
+        recoilComponent.GetComponent<Recoil>().StartRecoil(0.2f, weapon.recoil, weapon.recoilSpeed);
+
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
             //we hit something
             if(hit.collider.tag == "Enemy")
             {
-                enemyManager.EnemyShot(hit.collider.gameObject, weapon.damage);
+                enemyManager.GetComponent<EnemyManager>().EnemyShot(hit.collider.gameObject, weapon.damage);
             }
         }
     }
