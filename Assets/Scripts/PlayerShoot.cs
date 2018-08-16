@@ -14,6 +14,11 @@ public class PlayerShoot : MonoBehaviour {
 
     [SerializeField] GameObject recoilComponent;
 
+    [SerializeField] ParticleSystem flash1;
+    [SerializeField] ParticleSystem flash2;
+
+
+
     private void Start()
     {
         enemyManager = GameObject.Find("EnemyManager");
@@ -30,6 +35,8 @@ public class PlayerShoot : MonoBehaviour {
     void Shoot()
     {
         recoilComponent.GetComponent<Recoil>().StartRecoil(0.2f, -weapon.recoil, weapon.recoilSpeed);
+        flash1.Play();
+        flash2.Play();
 
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
@@ -38,6 +45,13 @@ public class PlayerShoot : MonoBehaviour {
             if(hit.collider.tag == "Enemy")
             {
                 enemyManager.GetComponent<EnemyManager>().EnemyShot(hit.collider.gameObject, weapon.damage);
+                //knocks enemy back when hit
+                hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized * 0.8f, hit.point, ForceMode.Impulse);
+            }
+            if (hit.collider.tag == "Object")
+            {
+                //knocks objects away when hit
+                hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized,hit.point, ForceMode.Impulse);
             }
         }
     }
