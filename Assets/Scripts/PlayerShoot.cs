@@ -51,7 +51,7 @@ public class PlayerShoot : MonoBehaviour {
             if (hit.collider.tag == "Object")
             {
                 //knocks objects away when hit
-                hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized,hit.point, ForceMode.Impulse);
+                hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized, hit.point, ForceMode.Impulse);
             }
         }
     }
