@@ -10,9 +10,17 @@ public class EnemyHealth : MonoBehaviour
     float enemyCurrentHP;
     [SerializeField]
     Slider enemyHPSlider;
+    [SerializeField]
+    GameObject enemyManager;
+    [SerializeField]
+    WaveSpawner myWaveSpawner;
 
     void Start()
     {
+
+        enemyManager = GameObject.Find("EnemyManager");
+
+
         enemyCurrentHP = enemyMaxHP;
 
         enemyHPSlider.maxValue = enemyMaxHP;
@@ -36,8 +44,11 @@ public class EnemyHealth : MonoBehaviour
     }
     void EnemyDie()
     {
+        enemyManager.GetComponent<EnemyManager>().DecreaseCurrentEnemies(gameObject);
+           /*DecreaseCurrentEnemies(gameObject);   /*I really want this to work*/
         Destroy(gameObject);
     }
+
     /*
     void OnCollisionEnter(Collision col)
     {

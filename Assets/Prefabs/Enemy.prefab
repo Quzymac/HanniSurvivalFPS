@@ -158,7 +158,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475062728269908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.92, y: 1.26, z: 21.353737}
+  m_LocalPosition: {x: 38.48557, y: 0, z: 26.112978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224598402005499670}
@@ -408,6 +408,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCurrentHP: 0
   enemyHPSlider: {fileID: 114864981988153992}
+  EnemyManager: {fileID: 0}
+  myWaveSpawner: {fileID: 0}
 --- !u!114 &114714526544914256
 MonoBehaviour:
   m_ObjectHideFlags: 1
