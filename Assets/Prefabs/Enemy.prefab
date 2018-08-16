@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224967925635083442}
   - component: {fileID: 222422662906504624}
   - component: {fileID: 114269255771398906}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4219369519463244}
   - component: {fileID: 33551820204640748}
   - component: {fileID: 23903274267476586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 223961050479413010}
   - component: {fileID: 114459201093622316}
   - component: {fileID: 114180063774850076}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224874152969981168}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,11 +87,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4082940398988104}
   - component: {fileID: 136067125949246196}
+  - component: {fileID: 136652958538374194}
   - component: {fileID: 54322313410184818}
   - component: {fileID: 195131071833409820}
   - component: {fileID: 114626032163067282}
   - component: {fileID: 114213469184465094}
-  m_Layer: 0
+  - component: {fileID: 114714526544914256}
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,7 +110,7 @@ GameObject:
   - component: {fileID: 224266551765041806}
   - component: {fileID: 222360249158288346}
   - component: {fileID: 114343745171457032}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +128,7 @@ GameObject:
   - component: {fileID: 33937204175057438}
   - component: {fileID: 23619487165873870}
   - component: {fileID: 135867585581344912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224354433713728526}
   - component: {fileID: 114864981988153992}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +158,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475062728269908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.445858, y: 2.01, z: 5.51}
+  m_LocalPosition: {x: 16.92, y: 1.26, z: 21.353737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224598402005499670}
@@ -406,6 +408,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCurrentHP: 0
   enemyHPSlider: {fileID: 114864981988153992}
+--- !u!114 &114714526544914256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475062728269908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2435543ff2b3f624b8fee54dafb8f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacking: 0
+  inRange: 0
+  attackSpeed: 1
 --- !u!114 &114864981988153992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -477,6 +493,19 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136652958538374194
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475062728269908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.7
+  m_Height: 0
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195131071833409820
