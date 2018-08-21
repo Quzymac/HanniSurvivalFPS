@@ -4,41 +4,62 @@ using UnityEngine;
 
 public class Recoil : MonoBehaviour {
 
-    private float recoil = 0.0f;
-    private float maxRecoil_x = -20f;
-    private float maxRecoil_y = 20f;
-    private float recoilSpeed = 2f;
+    float recoilTimer = 0.0f;
+    float recoilPower = 10f;
+    [SerializeField] Transform gun;
 
-    public void StartRecoil(float recoilParam, float maxRecoil_xParam, float recoilSpeedParam)
+    Vector3 gunPosition;
+    float gunRecoilAmountZ;
+
+
+    void Start()
     {
-        // in seconds
-        recoil = recoilParam;
-        maxRecoil_x = maxRecoil_xParam;
-        recoilSpeed = recoilSpeedParam;
-        maxRecoil_y = Random.Range(-maxRecoil_xParam, maxRecoil_xParam);
+        gunPosition = gun.localPosition;
+        gunRecoilAmountZ = gunPosition.z - 0.3f;
     }
 
-    void recoiling()
+
+    void Update()
     {
-        if (recoil > 0f)
+
+        float recoilRotation = Random.Range(recoilPower * 0.3f, recoilPower) * 0.1f;
+        
+        //recoil up
+        if (recoilTimer > 0.075f)
         {
-            Quaternion maxRecoil = Quaternion.Euler(maxRecoil_x, maxRecoil_y, 0f);
-            // Dampen towards the target rotation
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
-            recoil -= Time.deltaTime;
+            //camera up
+            transform.Rotate(-recoilRotation, 0, 0);
+
+            //gun back
+            if (gun.localPosition.z > gunRecoilAmountZ)
+            {
+                gun.Translate(0, 0, -0.05f);
+            }
+
+            recoilTimer -= Time.deltaTime;
+        }            
+        //recoil down
+        else if (recoilTimer > 0f)
+        {
+            //camera down
+            transform.Rotate(recoilRotation * 0.33f, 0, 0);
+            //gun forward
+            gun.Translate(0, 0, 0.05f * 0.67f);
+            
+            recoilTimer -= Time.deltaTime * 0.33f;
         }
         else
         {
-            recoil = 0f;
-            // Dampen towards the target rotation
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
+            //reset gun position
+            gun.localPosition = Vector3.Lerp(gun.localPosition, gunPosition, Time.deltaTime * 10);
+
+            recoilTimer = 0;
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void StartRecoil(float recoilAmount)
     {
-        recoiling();
+        recoilTimer = 0.2f;
+        recoilPower = recoilAmount;
     }
 }
 

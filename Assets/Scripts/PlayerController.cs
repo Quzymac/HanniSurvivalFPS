@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float mouseSensitivity = 3f;
 
-    [SerializeField] float gravity = 10f;
     [SerializeField] float jumpForce = 2f;
     Vector3 jump;
     bool jumpUsed = false;
@@ -31,15 +30,18 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
         rb = GetComponent<Rigidbody>();
+
+        if (Cursor.lockState != CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
     }
 
     private void Update()
     {
 
-        if (Cursor.lockState != CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+       
 
         //calculate movement velocity as a 3D vector
         float xMov = Input.GetAxisRaw("Horizontal");

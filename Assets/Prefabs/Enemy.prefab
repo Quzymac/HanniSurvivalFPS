@@ -87,7 +87,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4082940398988104}
   - component: {fileID: 136067125949246196}
-  - component: {fileID: 136652958538374194}
   - component: {fileID: 54322313410184818}
   - component: {fileID: 195131071833409820}
   - component: {fileID: 114626032163067282}
@@ -158,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1475062728269908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.48557, y: 0, z: 26.112978}
+  m_LocalPosition: {x: 20, y: 2.01, z: 13.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224598402005499670}
@@ -408,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCurrentHP: 0
   enemyHPSlider: {fileID: 114864981988153992}
-  EnemyManager: {fileID: 0}
+  enemyManager: {fileID: 0}
   myWaveSpawner: {fileID: 0}
 --- !u!114 &114714526544914256
 MonoBehaviour:
@@ -421,9 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2435543ff2b3f624b8fee54dafb8f815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacking: 0
-  inRange: 0
-  attackSpeed: 1
 --- !u!114 &114864981988153992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,19 +491,6 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136652958538374194
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1475062728269908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.7
-  m_Height: 0
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195131071833409820

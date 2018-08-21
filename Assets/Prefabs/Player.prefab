@@ -118,7 +118,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1235564629706270
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 4100730392633566}
   - component: {fileID: 20778835338773422}
   - component: {fileID: 81365098412406860}
+  - component: {fileID: 114438983917276230}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -162,22 +163,6 @@ GameObject:
   - component: {fileID: 23762001313351372}
   m_Layer: 0
   m_Name: Cube (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1459908703384810
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4056932117315036}
-  - component: {fileID: 114755940361148540}
-  m_Layer: 0
-  m_Name: RecoilObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,20 +312,6 @@ Transform:
   m_Father: {fileID: 4315169648469884}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4056932117315036
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1459908703384810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4100730392633566}
-  m_Father: {fileID: 4317928339618554}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4100730392633566
 Transform:
   m_ObjectHideFlags: 1
@@ -353,8 +324,8 @@ Transform:
   m_Children:
   - {fileID: 224972638892645222}
   - {fileID: 4774581301252958}
-  m_Father: {fileID: 4056932117315036}
-  m_RootOrder: 0
+  m_Father: {fileID: 4317928339618554}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4182302969190814
 Transform:
@@ -429,11 +400,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1071811738678964}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.956242, y: 1.44, z: 14.966446}
+  m_LocalPosition: {x: 19.8, y: 1.44, z: 4.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4315169648469884}
-  - {fileID: 4056932117315036}
+  - {fileID: 4100730392633566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -967,16 +938,26 @@ MonoBehaviour:
     name: Pew-Pew Gun
     damage: 10
     range: 100
-    recoil: 5
-    recoilSpeed: 10
-  enemyManager: {fileID: 0}
+    fireRate: 0.2
+    recoil: 3.5
   cam: {fileID: 20778835338773422}
   mask:
     serializedVersion: 2
     m_Bits: 4294967295
-  recoilComponent: {fileID: 1459908703384810}
   flash1: {fileID: 198138195516259478}
   flash2: {fileID: 198704503248320916}
+--- !u!114 &114438983917276230
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1235564629706270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6a853c194dae544a684fa392dff6ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 4774581301252958}
 --- !u!114 &114462701279071640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1023,22 +1004,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   mouseSensitivity: 3
-  gravity: 10
   jumpForce: 20
   thrusterForce: 800
   thrusterFuelBurnSpeed: 1
   thrusterFuelRegenSpeed: 0.3
---- !u!114 &114755940361148540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1459908703384810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c6a853c194dae544a684fa392dff6ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114887016455001388
 MonoBehaviour:
   m_ObjectHideFlags: 1

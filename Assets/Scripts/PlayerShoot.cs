@@ -6,35 +6,40 @@ public class PlayerShoot : MonoBehaviour {
 
     public PlayerWeapon weapon;
 
-    [SerializeField] GameObject enemyManager;
+    GameObject enemyManager;
 
     [SerializeField] Camera cam;
 
     [SerializeField] LayerMask mask;
-
-    [SerializeField] GameObject recoilComponent;
-
+    
     [SerializeField] ParticleSystem flash1;
     [SerializeField] ParticleSystem flash2;
+
+    float fireRateTimer;
 
 
 
     private void Start()
     {
         enemyManager = GameObject.Find("EnemyManager");
+        fireRateTimer = weapon.fireRate;
     }
 
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        fireRateTimer -= Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && fireRateTimer <= 0)
         {
             Shoot();
         }
     }
     void Shoot()
     {
-        recoilComponent.GetComponent<Recoil>().StartRecoil(0.2f, -weapon.recoil, weapon.recoilSpeed);
+        fireRateTimer = weapon.fireRate;
+        cam.GetComponent<Recoil>().StartRecoil(weapon.recoil);
+        
         flash1.Play();
         flash2.Play();
 
@@ -46,7 +51,7 @@ public class PlayerShoot : MonoBehaviour {
             {
                 enemyManager.GetComponent<EnemyManager>().EnemyShot(hit.collider.gameObject, weapon.damage);
                 //knocks enemy back when hit
-                hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized * 0.8f, hit.point, ForceMode.Impulse);
+                //hit.collider.gameObject.GetComponent<Rigidbody>().AddForceAtPosition((hit.collider.transform.position - gameObject.transform.position).normalized * 0.8f, hit.point, ForceMode.Impulse);
             }
             if (hit.collider.tag == "Object")
             {
