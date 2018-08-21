@@ -7,21 +7,25 @@ public class WaveSpawner : MonoBehaviour {
     [SerializeField]
     bool isTriggered;
     [SerializeField]
-    EnemyManager EnemyManager;
+    EnemyManager enemyManager;
+    [SerializeField]
+    float timeBetweenSpawns = 3f;
 
     [SerializeField]
     Transform[] spawnPoints;
     [SerializeField]
     GameObject[] myEnemies;
 
-    
+    WaveSpawnerUI myWaveSpawnerUI;
 
-    int amountOfEnemies = 5;
-    //float timeBetweenSpawns = 3f;
+    [SerializeField]
+    int amountSpawnedEnemies = 5;
+
 
     private void Start()
     {
         isTriggered = false;
+        myWaveSpawnerUI = gameObject.GetComponent<WaveSpawnerUI>();
     }
 
     void OnTriggerEnter(Collider col) // When our player enters the platform (trigger)
@@ -30,30 +34,39 @@ public class WaveSpawner : MonoBehaviour {
         {
             if (isTriggered == false)
             {
-                Spawn();
+                StartCoroutine (Spawn());
             }
                 isTriggered = true;          
         }
     }
 
-    void Spawn()
+    IEnumerator Spawn()
     {
-        for (int i = 0; i < amountOfEnemies; i++)
+        myWaveSpawnerUI.UpdateWaveSpawnerUI();
+
+        for (int i = 0; i < amountSpawnedEnemies; i++)
         {
-            int spawnPointIndex = Random.Range(0, spawnPoints.Length); // Gets a random spawnpoint! :)
+            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
             Instantiate(myEnemies[0], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-            EnemyManager.IncreaseCurrentEnemies(myEnemies[0]);
+            enemyManager.IncreaseCurrentEnemies();
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
     }
 
-    public void CheckIfFinished(int enemiesLeft)
+    public void CheckIfFinished(/*int enemiesLeft*/)
     {
-        if (enemiesLeft == 0)
+        if (enemyManager.GetEnemiesKilled() == amountSpawnedEnemies)
         {
             Debug.Log("A winner is you!");
+            // Add some kind of "next level" shit here
         }
         else
-            Debug.Log("The code reached this???");
+            Debug.Log("You ain't done yet, son!");
 
+    }
+
+    public int GetAmountOfEnemies()
+    {
+        return amountSpawnedEnemies;
     }
 }

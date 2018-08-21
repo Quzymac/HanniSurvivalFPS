@@ -13,13 +13,17 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     GameObject enemyManager;
     [SerializeField]
-    WaveSpawner myWaveSpawner;
+    GameObject myWaveSpawner;
+
+    WaveSpawnerUI myWaveSpawnerUI;
 
     void Start()
     {
 
         enemyManager = GameObject.Find("EnemyManager");
 
+        myWaveSpawner = GameObject.Find("WaveController");
+        myWaveSpawnerUI = myWaveSpawner.GetComponent<WaveSpawnerUI>(); // my god this is ugly
 
         enemyCurrentHP = enemyMaxHP;
 
@@ -44,24 +48,8 @@ public class EnemyHealth : MonoBehaviour
     }
     void EnemyDie()
     {
-        enemyManager.GetComponent<EnemyManager>().DecreaseCurrentEnemies(gameObject);
-           /*DecreaseCurrentEnemies(gameObject);   /*I really want this to work*/
+        enemyManager.GetComponent<EnemyManager>().DecreaseCurrentEnemies();
+        myWaveSpawnerUI.UpdateWaveSpawnerUI();
         Destroy(gameObject);
     }
-
-    /*
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Bullet")  // Change this how you want so that it fits your code :)
-        {
-            enemyCurrentHP -= 20f;
-            Destroy(col.gameObject);
-            enemyHPSlider.value = enemyCurrentHP;
-            if (enemyCurrentHP < 1f)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
-    */
 }

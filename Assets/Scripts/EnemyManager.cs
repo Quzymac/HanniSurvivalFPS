@@ -5,45 +5,53 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
 
     //[SerializeField] int enemiesAlive;
-    [SerializeField] int enemiesKilled;
+    [SerializeField]
+    int enemiesKilled;
+    [SerializeField]
+    int enemiesAlive;
+
     [SerializeField]
     WaveSpawner waveSpawner;
-    [SerializeField]
-    List<GameObject> enemies = new List<GameObject>();  // Thought this might be used to keep track of how many are left (0 unlocks next level?) instead of an int which increases/decreases.
+    //List<GameObject> currentEnemiesAlive = new List<GameObject>();  Thought this might be used to keep track of how many are left (0 unlocks next level?) instead of an int which increases/decreases.    
+
+    private void Start()
+    {
+        enemiesKilled = 0;
+    }
 
     public void EnemyShot(GameObject enemyGameObject, float dmg)
     {
         enemyGameObject.GetComponent<EnemyHealth>().TakeDamage(dmg);
     }
 
-    /*public int GetEnemiesAlive()
+    public void IncreaseCurrentEnemies()
+    {
+        enemiesAlive++;
+        return;
+    }
+
+    public void DecreaseCurrentEnemies()
+    {
+        // currentEnemiesAlive.Remove(killedEnemy); 
+        enemiesAlive--;
+        enemiesKilled++;
+        waveSpawner.CheckIfFinished();
+        return;
+    }
+
+    public int GetEnemiesAlive()
     {
         return enemiesAlive;
-    }*/
+    }
 
     public int GetEnemiesKilled()
     {
         return enemiesKilled;
     }
 
-    public int GetCurrentAmountOfEnemies()
+    public void ResetEnemiesDead()
     {
-        return enemies.Count; 
-    }
-
-    public void IncreaseCurrentEnemies(GameObject spawnedEnemy)
-    {
-        enemies.Add(spawnedEnemy);
-        //enemiesAlive++;
-        return;
-    }
-
-    public void DecreaseCurrentEnemies(GameObject killedEnemy)
-    {
-        enemies.Remove(killedEnemy);
-        enemiesKilled++;
-        waveSpawner.CheckIfFinished(enemies.Count - 1); // I guess?
-        //enemiesAlive--;
+        enemiesKilled = 0;
         return;
     }
 }

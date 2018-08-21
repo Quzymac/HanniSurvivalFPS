@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103177f7393842c42a70c15b681214d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesKilled: 7
+  enemiesKilled: 0
+  enemiesAlive: 0
   waveSpawner: {fileID: 0}
-  enemies: []

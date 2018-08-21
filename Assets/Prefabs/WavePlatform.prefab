@@ -55,8 +55,9 @@ GameObject:
   - component: {fileID: 64404094904731112}
   - component: {fileID: 54547748157297688}
   - component: {fileID: 114801268408138050}
+  - component: {fileID: 114370208634141598}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: WaveController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,6 +212,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114370208634141598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863372259583860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d91f6d9fe3e38a459ad182fe10a6463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myEnemyManager: {fileID: 0}
+  SpawnCounter: {fileID: 0}
 --- !u!114 &114801268408138050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTriggered: 0
-  EnemyManager: {fileID: 0}
+  enemyManager: {fileID: 0}
+  timeBetweenSpawns: 3
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
